@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>جمعية طلاب الهندسة — جامعة كراري</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green: #1a4d2e;
+      --green-mid: #2d6a45;
+      --green-light: #3d8b5e;
+      --beige: #f5efe6;
+      --beige-dark: #e8ddd0;
+      --beige-mid: #d4c4b0;
+      --white: #ffffff;
+      --text-dark: #0f2e1a;
+      --text-muted: #5a7a65;
+      --shadow: rgba(26, 77, 46, 0.15);
+      --gold: #c9a84c;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Cairo', 'Tajawal', sans-serif;
+      background: var(--beige);
+      color: var(--text-dark);
+      direction: rtl;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; right: 0; left: 0; z-index: 100;
+      background: rgba(26, 77, 46, 0.97);
+      backdrop-filter: blur(12px);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 68px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.2);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 0.75rem; text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 42px; height: 42px;
+      background: var(--gold); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; flex-shrink: 0;
+    }
+    .nav-logo-text { color: var(--white); font-size: 0.95rem; font-weight: 700; line-height: 1.3; }
+    .nav-logo-text span { display: block; font-weight: 300; font-size: 0.75rem; color: var(--beige-mid); }
+
+    .nav-links { display: flex; gap: 0.25rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.85); text-decoration: none;
+      font-size: 0.9rem; font-weight: 500;
+      padding: 0.4rem 0.85rem; border-radius: 6px; transition: all 0.2s;
+    }
+    .nav-links a:hover { background: rgba(255,255,255,0.12); color: var(--white); }
+
+    .library-btn {
+      background: var(--gold) !important; color: var(--text-dark) !important;
+      font-weight: 700 !important; padding: 0.45rem 1.1rem !important;
+      border-radius: 8px !important;
+      display: flex; align-items: center; gap: 0.4rem;
+      transition: transform 0.2s, box-shadow 0.2s !important;
+    }
+    .library-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(201,168,76,0.45); background: #d4b455 !important; }
+
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px; cursor: pointer;
+      background: none; border: none; padding: 4px;
+    }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; }
+
+    .mobile-menu {
+      display: none; position: fixed; top: 68px; right: 0; left: 0; z-index: 99;
+      background: var(--green); padding: 1rem 1.5rem 1.5rem;
+      flex-direction: column; gap: 0.5rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: rgba(255,255,255,0.9); text-decoration: none;
+      font-size: 1rem; font-weight: 500;
+      padding: 0.65rem 1rem; border-radius: 8px; transition: background 0.2s;
+    }
+    .mobile-menu a:hover { background: rgba(255,255,255,0.1); }
+    .mobile-library {
+      background: var(--gold) !important; color: var(--text-dark) !important;
+      font-weight: 700 !important; text-align: center; margin-top: 0.5rem;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, var(--green) 0%, var(--green-mid) 55%, #1e5c38 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 8rem 1.5rem 5rem;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 80% 20%, rgba(201,168,76,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 20% 80%, rgba(255,255,255,0.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-gear {
+      position: absolute; opacity: 0.05; font-size: 28rem; color: var(--white);
+      right: -6rem; bottom: -4rem; line-height: 1;
+      animation: spin-slow 40s linear infinite; pointer-events: none;
+    }
+    .hero-gear2 {
+      position: absolute; opacity: 0.04; font-size: 14rem; color: var(--beige);
+      left: -2rem; top: 6rem; line-height: 1;
+      animation: spin-slow 25s linear infinite reverse; pointer-events: none;
+    }
+    @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(201,168,76,0.18); border: 1px solid rgba(201,168,76,0.4);
+      color: var(--gold); font-size: 0.8rem; font-weight: 600;
+      padding: 0.35rem 1rem; border-radius: 50px; margin-bottom: 1.5rem;
+      animation: fadeUp 0.7s ease both;
+    }
+    .hero h1 {
+      font-family: 'Tajawal', sans-serif;
+      font-size: clamp(2.2rem, 6vw, 4.2rem); font-weight: 900;
+      color: var(--white); line-height: 1.25; margin-bottom: 1.2rem;
+      animation: fadeUp 0.8s 0.1s ease both;
+    }
+    .hero h1 em { color: var(--gold); font-style: normal; }
+    .hero p {
+      font-size: clamp(1rem, 2.5vw, 1.2rem); color: rgba(255,255,255,0.78);
+      max-width: 560px; line-height: 1.75; margin-bottom: 2.5rem;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+    .hero-ctas {
+      display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+    .btn-primary {
+      background: var(--gold); color: var(--text-dark);
+      font-weight: 700; font-size: 1rem; padding: 0.85rem 2rem; border-radius: 10px;
+      text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.4); }
+    .btn-outline {
+      border: 2px solid rgba(255,255,255,0.4); color: var(--white);
+      font-weight: 600; font-size: 1rem; padding: 0.85rem 2rem; border-radius: 10px;
+      text-decoration: none; background: transparent; transition: all 0.2s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
+
+    .hero-stats {
+      display: flex; gap: 2.5rem; flex-wrap: wrap; justify-content: center;
+      margin-top: 4rem; padding-top: 3rem;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      animation: fadeUp 0.8s 0.4s ease both;
+    }
+    .stat { text-align: center; }
+    .stat-number { font-size: 2rem; font-weight: 900; color: var(--gold); font-family: 'Tajawal', sans-serif; }
+    .stat-label { font-size: 0.85rem; color: rgba(255,255,255,0.65); margin-top: 0.2rem; }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 1.5rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em;
+      color: var(--green-light); margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-family: 'Tajawal', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800;
+      color: var(--text-dark); line-height: 1.25; margin-bottom: 0.8rem;
+    }
+    .section-sub { color: var(--text-muted); font-size: 1rem; line-height: 1.75; max-width: 540px; }
+    .section-divider { width: 56px; height: 4px; background: var(--gold); border-radius: 4px; margin: 1.2rem 0 2.5rem; }
+
+    /* ── NEWS ── */
+    #news { background: var(--white); }
+    .news-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; }
+    .news-card {
+      background: var(--beige); border-radius: 16px; overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s; cursor: pointer;
+      border: 1px solid var(--beige-dark);
+    }
+    .news-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px var(--shadow); }
+    .news-card.featured { display: flex; flex-direction: column; }
+    .news-img {
+      width: 100%; aspect-ratio: 16/9;
+      background: linear-gradient(135deg, var(--green) 0%, var(--green-mid) 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem; flex-shrink: 0; position: relative; overflow: hidden;
+    }
+    .news-img.small { aspect-ratio: 4/3; font-size: 2.5rem; }
+    .news-img::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.25));
+    }
+    .news-tag {
+      position: absolute; top: 1rem; right: 1rem; z-index: 2;
+      background: var(--gold); color: var(--text-dark);
+      font-size: 0.7rem; font-weight: 700; padding: 0.25rem 0.65rem; border-radius: 50px;
+    }
+    .news-body { padding: 1.4rem; flex: 1; display: flex; flex-direction: column; }
+    .news-date { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+    .news-title { font-size: 1.05rem; font-weight: 700; color: var(--text-dark); line-height: 1.5; margin-bottom: 0.6rem; }
+    .news-card.featured .news-title { font-size: 1.3rem; }
+    .news-excerpt { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; flex: 1; }
+    .news-read-more {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      margin-top: 1rem; font-size: 0.82rem; font-weight: 700;
+      color: var(--green-mid); text-decoration: none;
+    }
+    .news-read-more:hover { color: var(--green); }
+    .side-news { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    /* ── ABOUT ── */
+    #about { background: var(--beige); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .about-visual {
+      background: linear-gradient(145deg, var(--green) 0%, var(--green-mid) 100%);
+      border-radius: 24px; aspect-ratio: 1;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 8rem; position: relative; overflow: hidden;
+      box-shadow: 0 20px 60px rgba(26,77,46,0.3);
+    }
+    .about-visual::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at 30% 30%, rgba(201,168,76,0.2) 0%, transparent 60%);
+    }
+    .about-features { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 2rem; }
+    .about-feature {
+      display: flex; gap: 1rem; align-items: flex-start;
+      background: var(--white); padding: 1rem 1.2rem; border-radius: 12px;
+      border-right: 3px solid var(--green);
+    }
+    .feature-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .feature-title { font-weight: 700; font-size: 0.95rem; color: var(--text-dark); margin-bottom: 0.2rem; }
+    .feature-desc { font-size: 0.83rem; color: var(--text-muted); line-height: 1.5; }
+
+    /* ── EVENTS ── */
+    #events { background: var(--white); }
+    .events-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .event-card {
+      background: var(--beige); border-radius: 16px; padding: 1.5rem;
+      border: 1px solid var(--beige-dark); transition: transform 0.25s, box-shadow 0.25s;
+      position: relative; overflow: hidden;
+    }
+    .event-card::before {
+      content: ''; position: absolute; top: 0; right: 0; width: 80px; height: 80px;
+      background: radial-gradient(circle at top right, rgba(26,77,46,0.08) 0%, transparent 70%);
+    }
+    .event-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px var(--shadow); }
+    .event-date-box {
+      width: 54px; height: 60px; background: var(--green); border-radius: 10px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      margin-bottom: 1.2rem;
+    }
+    .event-day { font-size: 1.4rem; font-weight: 900; color: var(--white); line-height: 1; }
+    .event-month { font-size: 0.65rem; font-weight: 600; color: var(--gold); }
+    .event-title { font-size: 1rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.5rem; }
+    .event-meta { font-size: 0.8rem; color: var(--text-muted); line-height: 1.6; }
+    .event-type {
+      display: inline-block; margin-top: 0.8rem;
+      font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 50px;
+      background: rgba(26,77,46,0.1); color: var(--green);
+    }
+
+    /* ── LIBRARY CTA ── */
+    #library {
+      padding: 4rem 1.5rem;
+      background: linear-gradient(135deg, var(--green) 0%, var(--green-mid) 100%);
+    }
+    .library-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 2rem; flex-wrap: wrap;
+    }
+    .library-text h2 {
+      font-family: 'Tajawal', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800;
+      color: var(--white); margin-bottom: 0.7rem;
+    }
+    .library-text p { color: rgba(255,255,255,0.75); font-size: 1rem; line-height: 1.7; max-width: 460px; }
+    .library-drive-btn {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      background: var(--white); color: var(--green);
+      font-weight: 800; font-size: 1.05rem; padding: 1rem 2.2rem; border-radius: 12px;
+      text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15); white-space: nowrap;
+    }
+    .library-drive-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--beige); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .contact-cards { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-card {
+      display: flex; align-items: center; gap: 1rem;
+      background: var(--white); padding: 1.1rem 1.3rem; border-radius: 12px;
+      border: 1px solid var(--beige-dark);
+    }
+    .contact-card-icon {
+      width: 44px; height: 44px; flex-shrink: 0;
+      background: rgba(26,77,46,0.1); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; font-size: 1.3rem;
+    }
+    .contact-card-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.2rem; }
+    .contact-card-value { font-weight: 700; font-size: 0.95rem; color: var(--text-dark); }
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group label { font-size: 0.82rem; font-weight: 600; color: var(--text-dark); }
+    .form-group input, .form-group textarea, .form-group select {
+      padding: 0.75rem 1rem; border-radius: 10px;
+      border: 1.5px solid var(--beige-dark); background: var(--white);
+      font-family: 'Cairo', sans-serif; font-size: 0.9rem; color: var(--text-dark);
+      transition: border-color 0.2s; width: 100%; direction: rtl;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      outline: none; border-color: var(--green-light);
+    }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-submit {
+      background: var(--green); color: var(--white); font-weight: 700; font-size: 1rem;
+      padding: 0.85rem 2rem; border-radius: 10px; border: none; cursor: pointer;
+      font-family: 'Cairo', sans-serif; transition: background 0.2s, transform 0.2s;
+    }
+    .form-submit:hover { background: var(--green-mid); transform: translateY(-1px); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--text-dark); color: rgba(255,255,255,0.65); padding: 3rem 1.5rem 1.5rem; }
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem;
+      padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer-logo { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.9rem; }
+    .footer-logo-icon {
+      width: 38px; height: 38px; background: var(--gold);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+    }
+    .footer-logo-name { color: var(--white); font-weight: 700; font-size: 0.95rem; }
+    .footer-brand p { font-size: 0.85rem; line-height: 1.7; }
+    .footer-col h4 { color: var(--white); font-weight: 700; margin-bottom: 1rem; font-size: 0.9rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+    .footer-col ul a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+    .footer-col ul a:hover { color: var(--gold); }
+    .footer-bottom {
+      max-width: 1100px; margin: 0 auto; padding-top: 1.5rem;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;
+    }
+    .footer-bottom p { font-size: 0.8rem; }
+    .gold { color: var(--gold); }
+
+    .back-top {
+      position: fixed; bottom: 1.5rem; left: 1.5rem; z-index: 99;
+      width: 44px; height: 44px; background: var(--green); color: var(--white);
+      border-radius: 50%; border: none; cursor: pointer; font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2); transition: transform 0.2s, opacity 0.2s;
+      opacity: 0; pointer-events: none;
+    }
+    .back-top.visible { opacity: 1; pointer-events: all; }
+    .back-top:hover { transform: translateY(-2px); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .news-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-visual { max-width: 340px; margin: 0 auto; }
+      .events-grid { grid-template-columns: 1fr 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .events-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .library-inner { flex-direction: column; text-align: center; }
+      .hero-stats { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav>
+  <a href="#home" class="nav-logo">
+    <div class="nav-logo-icon">⚙️</div>
+    <div class="nav-logo-text">
+      جمعية طلاب الهندسة — جامعة كراري
+      <span>Engineering Students Association, Karary University</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#news">الأخبار</a></li>
+    <li><a href="#about">عن الجمعية</a></li>
+    <li><a href="#events">الفعاليات</a></li>
+    <li><a href="#contact">تواصل معنا</a></li>
+    <li>
+      <a href="https://drive.google.com/drive/folders/1-Jl4OSdqH-cgJ6Jmqlql1v02TdQn6pM2" target="_blank" rel="noopener noreferrer" class="library-btn">
+        📚 المكتبة
+      </a>
+    </li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="القائمة">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#news" onclick="closeMobile()">📰 الأخبار</a>
+  <a href="#about" onclick="closeMobile()">🏛️ عن الجمعية</a>
+  <a href="#events" onclick="closeMobile()">📅 الفعاليات</a>
+  <a href="#contact" onclick="closeMobile()">📩 تواصل معنا</a>
+  <a href="https://drive.google.com/drive/folders/1-Jl4OSdqH-cgJ6Jmqlql1v02TdQn6pM2" target="_blank" rel="noopener noreferrer" class="mobile-library">📚 المكتبة — Library</a>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero" id="home">
+  <div class="hero-gear">⚙</div>
+  <div class="hero-gear2">⚙</div>
+  <div class="hero-badge">🎓 جمعية طلابية معتمدة</div>
+  <h1>جمعية طلاب الهندسة<br /><em>جامعة كراري</em></h1>
+  <p>منصتك الأكاديمية والمهنية لتطوير مهاراتك، وتوسيع شبكة علاقاتك، والنهوض بمسيرتك في عالم الهندسة.</p>
+  <div class="hero-ctas">
+    <a href="#news" class="btn-primary">📰 آخر الأخبار</a>
+    <a href="https://drive.google.com/drive/folders/1-Jl4OSdqH-cgJ6Jmqlql1v02TdQn6pM2" target="_blank" rel="noopener noreferrer" class="btn-outline">📚 المكتبة الرقمية</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-number">+500</div><div class="stat-label">عضو نشط</div></div>
+    <div class="stat"><div class="stat-number">+120</div><div class="stat-label">فعالية سنوياً</div></div>
+    <div class="stat"><div class="stat-number">+300</div><div class="stat-label">مرجع في المكتبة</div></div>
+    <div class="stat"><div class="stat-number">10+</div><div class="stat-label">سنوات من الريادة</div></div>
+  </div>
+</section>
+
+<!-- ── NEWS ── -->
+<section id="news">
+  <div class="container">
+    <div class="section-label">📰 أحدث المستجدات</div>
+    <h2 class="section-title">آخر الأخبار والإعلانات</h2>
+    <div class="section-divider"></div>
+
+    <div class="news-grid">
+      <div class="news-card featured">
+        <div class="news-img">
+          <span class="news-tag">📢 إعلان رسمي</span>🎓
+        </div>
+        <div class="news-body">
+          <div class="news-date">📅 2026</div>
+          <div class="news-title">فتح باب التحويل إلى جامعة كراري لجميع التخصصات</div>
+          <div class="news-excerpt">
+            تُعلن أمانة الشؤون الأكاديمية بجامعة كراري عن فتح باب التحويل من مختلف مؤسسات التعليم العالي إلى جامعة كراري في جميع التخصصات المتاحة. يُرجى التقدم بالطلبات إلى مبنى أمانة الشؤون الأكاديمية في بانت. لا تُفوّت هذه الفرصة للانضمام إلى أسرة جامعة كراري.
+          </div>
+          <a href="https://karary.edu.sd/news/transfer2026-ar/" target="_blank" rel="noopener noreferrer" class="news-read-more">اقرأ التفاصيل على الموقع الرسمي ←</a>
+        </div>
+      </div>
+
+      <div class="side-news">
+        <div class="news-card">
+          <div class="news-img small"><span class="news-tag">📋 التقديم</span>🏛️</div>
+          <div class="news-body">
+            <div class="news-date">📅 2026</div>
+            <div class="news-title">كيفية التقديم للتحويل</div>
+            <div class="news-excerpt">تُقدَّم الطلبات شخصياً إلى مبنى أمانة الشؤون الأكاديمية في بانت. يشمل التحويل جميع التخصصات المتاحة بالجامعة.</div>
+            <a href="https://karary.edu.sd/news/transfer2026-ar/" target="_blank" rel="noopener noreferrer" class="news-read-more">تفاصيل التقديم ←</a>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="news-img small"><span class="news-tag">🌐 الموقع الرسمي</span>📡</div>
+          <div class="news-body">
+            <div class="news-date">📅 جامعة كراري</div>
+            <div class="news-title">الموقع الرسمي لجامعة كراري</div>
+            <div class="news-excerpt">تفضّل بزيارة الموقع الرسمي لجامعة كراري للاطلاع على جميع الأخبار والإعلانات والتفاصيل الأكاديمية.</div>
+            <a href="https://karary.edu.sd/news/transfer2026-ar/" target="_blank" rel="noopener noreferrer" class="news-read-more">زيارة الموقع ←</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <div class="section-label">🏛️ من نحن</div>
+        <h2 class="section-title">رسالتنا وقيمنا</h2>
+        <div class="section-divider"></div>
+        <p class="section-sub">جمعية طلاب الهندسة بجامعة كراري بيئة أكاديمية وإبداعية تجمع طلاب الهندسة، تهدف إلى بناء جيل من المهندسين المبدعين المتمكنين من مهاراتهم التقنية والقيادية.</p>
+        <div class="about-features">
+          <div class="about-feature">
+            <div class="feature-icon">🔬</div>
+            <div>
+              <div class="feature-title">البحث والتطوير</div>
+              <div class="feature-desc">دعم مشاريع البحث العلمي وتقديم الموارد والإرشاد الأكاديمي للطلاب.</div>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="feature-icon">🤝</div>
+            <div>
+              <div class="feature-title">التواصل المهني</div>
+              <div class="feature-desc">ربط الطلاب بشركات ومهندسين متخصصين عبر فعاليات الشبكة المهنية.</div>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="feature-icon">🏆</div>
+            <div>
+              <div class="feature-title">المنافسات والمسابقات</div>
+              <div class="feature-desc">تمثيل الجامعة في المسابقات الهندسية المحلية والدولية وتحقيق الإنجازات.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="about-visual">⚙️</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EVENTS ── -->
+<section id="events">
+  <div class="container">
+    <div class="section-label">📅 الفعاليات القادمة</div>
+    <h2 class="section-title">لا تفوّت هذه الفرص</h2>
+    <div class="section-divider"></div>
+    <div class="events-grid">
+      <div class="event-card">
+        <div class="event-date-box"><div class="event-day">15</div><div class="event-month">أبريل</div></div>
+        <div class="event-title">ورشة: أتمتة التصنيع والذكاء الصناعي</div>
+        <div class="event-meta">🕙 10:00 ص &nbsp;|&nbsp; 📍 قاعة الهندسة — مبنى أ</div>
+        <span class="event-type">ورشة عمل</span>
+      </div>
+      <div class="event-card">
+        <div class="event-date-box"><div class="event-day">22</div><div class="event-month">أبريل</div></div>
+        <div class="event-title">ملتقى التوظيف الهندسي السنوي</div>
+        <div class="event-meta">🕙 09:00 ص &nbsp;|&nbsp; 📍 قاعة المؤتمرات الرئيسية</div>
+        <span class="event-type">ملتقى توظيف</span>
+      </div>
+      <div class="event-card">
+        <div class="event-date-box"><div class="event-day">05</div><div class="event-month">مايو</div></div>
+        <div class="event-title">مسابقة تصميم الروبوتات 2025</div>
+        <div class="event-meta">🕙 08:00 ص &nbsp;|&nbsp; 📍 المختبر المركزي</div>
+        <span class="event-type">مسابقة</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── LIBRARY CTA ── -->
+<section id="library">
+  <div class="container">
+    <div class="library-inner">
+      <div class="library-text">
+        <h2>📚 المكتبة الرقمية</h2>
+        <p>استكشف مئات المراجع الهندسية، الكتب، وأوراق البحث المتاحة لجميع الأعضاء. كل ما تحتاجه في مكان واحد على Google Drive.</p>
+      </div>
+      <a href="https://drive.google.com/drive/folders/1-Jl4OSdqH-cgJ6Jmqlql1v02TdQn6pM2" target="_blank" rel="noopener noreferrer" class="library-drive-btn">
+        🗂️ Library — المكتبة
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label">📩 تواصل معنا</div>
+    <h2 class="section-title">نحن هنا لمساعدتك</h2>
+    <div class="section-divider"></div>
+    <div class="contact-grid">
+      <div>
+        <p class="section-sub" style="margin-bottom:2rem;">هل لديك استفسار أو اقتراح؟ تواصل معنا وسيرد عليك فريقنا في أقرب وقت ممكن.</p>
+        <div class="contact-cards">
+          <div class="contact-card">
+            <div class="contact-card-icon">📧</div>
+            <div><div class="contact-card-label">البريد الإلكتروني</div><div class="contact-card-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3d50585e55135c4e4e525e7d4853544b584f4e54494413585948">[email&#160;protected]</a></div></div>
+          </div>
+          <div class="contact-card">
+            <div class="contact-card-icon">📍</div>
+            <div><div class="contact-card-label">الموقع</div><div class="contact-card-value">كلية الهندسة — مبنى أ، مكتب 204</div></div>
+          </div>
+          <div class="contact-card">
+            <div class="contact-card-icon">🕙</div>
+            <div><div class="contact-card-label">ساعات العمل</div><div class="contact-card-value">الأحد – الخميس: 9:00 ص – 4:00 م</div></div>
+          </div>
+          <div class="contact-card">
+            <div class="contact-card-icon">🔗</div>
+            <div>
+              <div class="contact-card-label">تابع محمد أنس — المطوّر</div>
+              <div class="contact-card-value" style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:0.3rem;">
+                <a href="https://www.linkedin.com/in/mohamed-anas-206334288" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.35rem;background:#0a66c2;color:#fff;text-decoration:none;font-size:0.82rem;font-weight:700;padding:0.3rem 0.7rem;border-radius:6px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                  LinkedIn
+                </a>
+                <a href="https://github.com/mohmedanas2002" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.35rem;background:#1a4d2e;color:#fff;text-decoration:none;font-size:0.82rem;font-weight:700;padding:0.3rem 0.7rem;border-radius:6px;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="white"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                  GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-group"><label>الاسم الكامل</label><input type="text" placeholder="أدخل اسمك الكامل" /></div>
+          <div class="form-group"><label>رقم القيد</label><input type="text" placeholder="رقم القيد الجامعي" /></div>
+        </div>
+        <div class="form-group"><label>البريد الإلكتروني</label><input type="email" placeholder="example@university.edu" /></div>
+        <div class="form-group">
+          <label>الموضوع</label>
+          <select>
+            <option value="">اختر موضوع الرسالة</option>
+            <option>استفسار عام</option>
+            <option>التسجيل في فعالية</option>
+            <option>الانضمام للجمعية</option>
+            <option>اقتراح أو شكوى</option>
+          </select>
+        </div>
+        <div class="form-group"><label>الرسالة</label><textarea placeholder="اكتب رسالتك هنا..."></textarea></div>
+        <button class="form-submit">إرسال الرسالة ✉️</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <div class="footer-logo-icon">⚙️</div>
+        <div class="footer-logo-name">جمعية طلاب الهندسة — جامعة كراري</div>
+      </div>
+      <p>نبني مهندسي الغد بالعلم والعمل والإبداع. منظمة طلابية ملتزمة برفع الكفاءة الهندسية وخدمة المجتمع الأكاديمي.</p>
+    </div>
+    <div class="footer-col">
+      <h4>روابط سريعة</h4>
+      <ul>
+        <li><a href="#news">الأخبار</a></li>
+        <li><a href="#about">عن الجمعية</a></li>
+        <li><a href="#events">الفعاليات</a></li>
+        <li><a href="https://drive.google.com/drive/folders/1-Jl4OSdqH-cgJ6Jmqlql1v02TdQn6pM2" target="_blank">📚 المكتبة</a></li>
+        <li><a href="#contact">تواصل معنا</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>مواردنا</h4>
+      <ul>
+        <li><a href="https://drive.google.com/drive/folders/1-Jl4OSdqH-cgJ6Jmqlql1v02TdQn6pM2" target="_blank">المكتبة الرقمية</a></li>
+        <li><a href="#">مشاريع التخرج</a></li>
+        <li><a href="#">بنك الأسئلة</a></li>
+        <li><a href="#">قاعدة المراجع</a></li>
+        <li><a href="#">النشرة الإخبارية</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 جمعية طلاب الهندسة — جامعة كراري &nbsp;|&nbsp; جميع الحقوق محفوظة</p>
+    <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+      <span style="font-size:0.8rem;color:rgba(255,255,255,0.5);">تابع المطوّر محمد أنس:</span>
+      <a href="https://www.linkedin.com/in/mohamed-anas-206334288" target="_blank" rel="noopener noreferrer" title="لينكدإن — محمد أنس" style="display:inline-flex;align-items:center;gap:0.4rem;color:rgba(255,255,255,0.7);text-decoration:none;font-size:0.82rem;font-weight:600;transition:color 0.2s;" onmouseover="this.style.color='#c9a84c'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/mohmedanas2002" target="_blank" rel="noopener noreferrer" title="GitHub — محمد أنس" style="display:inline-flex;align-items:center;gap:0.4rem;color:rgba(255,255,255,0.7);text-decoration:none;font-size:0.82rem;font-weight:600;transition:color 0.2s;" onmouseover="this.style.color='#c9a84c'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        GitHub
+      </a>
+    </div>
+  </div>
+</footer>
+
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="للأعلى">↑</button>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const backTop = document.getElementById('backTop');
+
+  hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  function closeMobile() { mobileMenu.classList.remove('open'); }
+
+  window.addEventListener('scroll', () => {
+    backTop.classList.toggle('visible', window.scrollY > 400);
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+ 
